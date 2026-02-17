@@ -30,6 +30,7 @@ NOTA: app.module.ts può collegare un numero n di componente e ogni componente �
 
 - ho rimosso il selector app-page-one su app.component.html
   RICORDA: <router-outlet> in Angular è una direttiva segnaposto utilizzata nei template per caricare dinamicamente componenti basati sull'URL corrente
+  Copilot: https://copilot.microsoft.com/shares/76FcCVs4F1Qsggh8VZeeW
 
 - su page-one.component.ts e su api.service.ts ho collegato il servizio. Poi su app.module.ts ho importato HttpClientModule perché funzioni
  import { HttpClientModule } from '@angular/common/http'; non lo fa automaticamente, bisogna scriverlo
@@ -42,3 +43,24 @@ NOTA: app.module.ts può collegare un numero n di componente e ogni componente �
   Su api.service.ts, ho modificato il codice: return this.http.get(this.URL);
   Poi su page-one.component.ts, ho modificato il codice: apiServ.getData().subscribe(pokemon => console.log(pokemon)); 
   NOTA: per gli osservabili si usa .subscribe
+
+  NOTA:   Differenza Promise e Observable https://copilot.microsoft.com/shares/VMqLdgC9JsLgmhGxp2DG6
+  In Angular, gli Observable sono oggetti, parte della libreria RxJS (Reactive Extensions for JavaScript), 
+  utilizzati per gestire flussi di dati asincroni ed eventi nel tempo. Rappresentano la base della programmazione reattiva, 
+  consentendo di emettere valori multipli (a differenza delle Promise che ne gestiscono uno solo) 
+  e permettendo a componenti o servizi di sottoscriversi per ricevere aggiornamenti. 
+  Gli Observable (RxJS) sono ancora ampiamente utilizzati nelle versioni recenti di Angular (18, 19, 20, 21), 
+  ma il loro ruolo sta cambiando con l'introduzione dei Signals. 
+
+- su api.service.ts, uso il metodo .pipe per gli observable. 
+ Il metodo .pipe() in Angular (RxJS) serve a concatenare ed applicare operatori RxJS in sequenza su un Observable, permettendo di trasformare, 
+ filtrare o manipolare i dati (flusso asincrono) prima che arrivino alla subscribe.
+
+- poi, per prendere il nome dei Pokemon, uso il metodo .map che deve essere importato (usando quickfix)
+  In Angular (e in generale in TypeScript/JavaScript), il metodo .map() serve principalmente a trasformare i dati contenuti all'interno di un array, 
+  creando un nuovo array con i risultati della trasformazione, senza modificare l'array originale. 
+
+- su page-one.component.ts, ho chiamato con getData() il nome del primo Pokemon. 
+
+- su page-one.component.html, ho messo <p>Il nome del Pokemon è: {{pokemonName | async}}</p> perché mostri il nome del Pokemon sulla pagina.
+

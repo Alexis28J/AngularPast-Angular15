@@ -1,1 +1,7 @@
-<p>page-one works!</p>
+<!-- <p>Il nome del Pokemon è: {{pokemonName | async}}</p> -->
+
+<!-- *ngFor era la forma precedente di fare il ciclo, ora si usa @for -->
+<div *ngFor="let pokemon of pokemonArray | async">
+    <span>{{pokemon.name}}</span>
+</div>
+
